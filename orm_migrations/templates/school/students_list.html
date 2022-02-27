@@ -1,0 +1,17 @@
+{% extends "school/base.html" %}
+{% load static %}
+
+{% block title %}Список учеников{% endblock %}
+{% block content %}
+<div class="row">
+  <ul>
+  {% for item in object_list %}
+    <li>{{ item.name }} {{ item.group }} </li>
+    Преподаватели:
+    <br>
+      {{ item.students.name }}: {{ item.students.subject }}
+    <br>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}
