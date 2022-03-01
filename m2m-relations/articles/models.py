@@ -20,11 +20,10 @@ class Tags(models.Model):
 
     name = models.CharField(max_length=256)
     tag = models.CharField(max_length=256)
-    scopes = models.CharField(max_length=256)
     articles = models.ManyToManyField(Article, through='TagsArticle')
 
 
 class TagsArticle(models.Model):
 
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    tags = models.ForeignKey(Tags, on_delete=models.CASCADE)
+    tags = models.ForeignKey(Tags, related_name='scopes', on_delete=models.CASCADE)
