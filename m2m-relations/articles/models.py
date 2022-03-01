@@ -16,14 +16,14 @@ class Article(models.Model):
         return self.title
 
 
-class Tags(models.Model):
+class Tag(models.Model):
 
     name = models.CharField(max_length=256)
-    tag = models.CharField(max_length=256)
-    articles = models.ManyToManyField(Article, through='TagsArticle')
+    articles = models.ManyToManyField(Article, through='ArticleTag')
 
 
-class TagsArticle(models.Model):
+class ArticleTag(models.Model):
 
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    tags = models.ForeignKey(Tags, related_name='scopes', on_delete=models.CASCADE)
+    is_main = models.BooleanField()
+    article = models.ForeignKey(Article, related_name='scopes', on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, related_name='scopes', on_delete=models.CASCADE)

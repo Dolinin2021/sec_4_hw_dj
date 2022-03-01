@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django.forms import BaseInlineFormSet
 
-from .models import Article, TagsArticle
+from .models import Article, ArticleTag
 
 
 class RelationshipInlineFormset(BaseInlineFormSet):
@@ -19,7 +19,7 @@ class RelationshipInlineFormset(BaseInlineFormSet):
 
 
 class RelationshipInline(admin.TabularInline):
-    model = TagsArticle
+    model = ArticleTag
 
 
 @admin.register(Article)
