@@ -11,5 +11,3 @@ def articles_list(request):
         'object_list': article_list
     }
     return render(request, template, context)
-    # используйте этот параметр для упорядочивания результатов
-    # https://docs.djangoproject.com/en/3.1/ref/models/querysets/#django.db.models.query.QuerySet.order_by

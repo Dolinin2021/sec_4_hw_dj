@@ -12,5 +12,3 @@ def students_list(request):
         'object_list': student_list
     }
     return render(request, template, context)
-    # используйте этот параметр для упорядочивания результатов
-    # https://docs.djangoproject.com/en/2.2/ref/models/querysets/#django.db.models.query.QuerySet.order_by
