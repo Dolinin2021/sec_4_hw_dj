@@ -5,24 +5,27 @@ from django.forms import BaseInlineFormSet
 from .models import Article, ArticleTag
 
 
-class RelationshipInlineFormset(BaseInlineFormSet):
+class ArticleTagInlineFormset(BaseInlineFormSet):
 
     def clean(self):
         count = 0
         for form in self.forms:
             if form.cleaned_data and form.cleaned_data['is_main']:
                 count = count + 1
-                if count > 1:
-                    raise ValidationError('Основным может быть только один раздел')
-                else:
-                    raise ValidationError('Укажите основной раздел')
+        if count > 1:
+            raise ValidationError('Основным может быть только один раздел')
+        if count == 0:
+            raise ValidationError('Укажите основной раздел')
         return super().clean()
 
 
-class RelationshipInline(admin.TabularInline):
+class ArticleTagInline(admin.TabularInline):
     model = ArticleTag
+    formset = ArticleTagInlineFormset
 
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    inlines = [RelationshipInline]
+    list_display = ['title', 'published_at']
+    list_filter = ['published_at']
+    inlines = [ArticleTagInline]
